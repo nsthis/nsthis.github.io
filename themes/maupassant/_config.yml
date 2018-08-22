@@ -28,7 +28,7 @@ valine: ## https://valine.js.org
   guest_info: nick,mail,link ## Attributes of reviewers.
 
 google_search: true ## Use Google search, true/false.
-baidu_search: true ## Use Baidu search, true/false.
+baidu_search: false ## Use Baidu search, true/false.
 swiftype: ## Your swiftype_key, e.g. m7b11ZrsT8Me7gzApciT
 tinysou: ## Your tinysou_key, e.g. 4ac092ad8d749fdc6293
 self_search: false ## Use a jQuery-based local search engine, true/false.
@@ -67,16 +67,11 @@ menu:
   - page: archive
     directory: archives/
     icon: fa-archive
-
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
-  - category
+  - search
   - tag
-  - links
  
 
-links:
-  - title: 你好我是森林
-    url: https://chensenlin.cn/
 
 timeline:
   - num: 1

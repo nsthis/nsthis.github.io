@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Elliot Ngok
-subtitle:
+title: Hello  广华
+subtitle: 今天你是否还有事情未完成？
 description:
-keywords: Elliot Ngok 
+keywords:   Hello  广华
 author: Elliot Ngok
 language: zh-CN
 timezone:
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 mathjax: true
