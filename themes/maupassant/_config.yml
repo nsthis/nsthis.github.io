@@ -70,8 +70,12 @@ menu:
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - search
   - tag
- 
-
+  - links
+links:
+  - title: 你好我是森林!
+    url: https://chensenlin.cn/
+  - title: 左手bug，右手情歌
+    url: https://www.eckes.site/
 
 timeline:
   - num: 1
