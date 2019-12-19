@@ -28,7 +28,9 @@
 <h3 id="Ab"><a href="#Ab" class="headerlink" title="Ab"></a>Ab</h3><p>全称是 apache benchmark，是 apache 官方推出的工具</p>
 <p>创建多个并发访问线程，模拟多个访问者同时对某一 URL 地址进行访问。它的测试目标是基于 URL 的，因此，它既可以用来测试 apache 的负载压力，也可以测试 nginx、lighthttp、 Tomcat、IIS 等其它 Web 服务器的压力。</p>
 <h3 id="Ab的使用"><a href="#Ab的使用" class="headerlink" title="Ab的使用"></a>Ab的使用</h3><p>模拟并发请求 100 次，总共请求 5000 次 ；Ab-c 100 -n 5000 待测试网站</p>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>测试机器与被测试机器分开;<br>不要对线上服务做压力测试;<br>观察(top)测试工具 ab 所在机器以及被测试的前端机的 CPU，内存，网络等都不超过最高限度的75%。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>测试机器与被测试机器分开;</p>
+<p>不要对线上服务做压力测试;</p>
+<p>观察(top)测试工具 ab 所在机器以及被测试的前端机的 CPU，内存，网络等都不超过最高限度的75%。</p>
 <h2 id="QPS-达到极限的解决方案"><a href="#QPS-达到极限的解决方案" class="headerlink" title="QPS 达到极限的解决方案"></a>QPS 达到极限的解决方案</h2><p>随着 QPS 的增长，每个阶段需要根据实际情况来进行优化，优化的方案也与硬件条件、网络带宽息息相关。</p>
 <h3 id="QPS达到50"><a href="#QPS达到50" class="headerlink" title="QPS达到50"></a>QPS达到50</h3><p>基本不需要优化。</p>
 <h3 id="QPS-达到-100"><a href="#QPS-达到-100" class="headerlink" title="QPS 达到 100"></a>QPS 达到 100</h3><p>假设关系型数据库的每次请求在 0.01 秒完成</p>
@@ -42,7 +44,11 @@
 <h3 id="QPS-达到-2000"><a href="#QPS-达到-2000" class="headerlink" title="QPS 达到 2000"></a>QPS 达到 2000</h3><p>这个级别下，文件系统访向锁都成为了灾难</p>
 <p>方案：做业务分离，分布式存储</p>
 <h2 id="高并发解决方案案例"><a href="#高并发解决方案案例" class="headerlink" title="高并发解决方案案例"></a>高并发解决方案案例</h2><h3 id="流量优化"><a href="#流量优化" class="headerlink" title="流量优化"></a>流量优化</h3><p>防盗链处理</p>
-<h3 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h3><p>减少HTTP请求；例如合并CSS js，图片<br>添加异步请求；延迟加载暂时不需要的内容<br>启用浏览器缓存和文件压缩；<br>CDN加速；<br>建立独立的图片服务器；</p>
+<h3 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h3><p>减少HTTP请求；例如合并CSS js，图片</p>
+<p>添加异步请求；延迟加载暂时不需要的内容</p>
+<p>启用浏览器缓存和文件压缩；</p>
+<p>CDN加速；</p>
+<p>建立独立的图片服务器；</p>
 <h3 id="服务端优化"><a href="#服务端优化" class="headerlink" title="服务端优化"></a>服务端优化</h3><p>页面静态化；并发处理；队列处理</p>
 <h3 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h3><p>数据库缓存；分库分表、分区操作；读写分离；负载均衡</p>
 <h3 id="Web服务器优化"><a href="#Web服务器优化" class="headerlink" title="Web服务器优化"></a>Web服务器优化</h3><p>负载均衡</p>
