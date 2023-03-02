@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Redis常用命令 | Hello This</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Redis常用命令</h1><a id="logo" href="/.">Hello This</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Redis常用命令</h1><div class="post-meta">2018-04-05<span> | </span><span class="category"><a href="/categories/Redis/">Redis</a></span></div><div class="post-content"><p>Redis命令学习</p>
+<a id="more"></a>
+<h2 id="Redis说明"><a href="#Redis说明" class="headerlink" title="Redis说明"></a>Redis说明</h2><p>1、基于内存的key-value数据库</p>
+<p>2、基于c语言编写的，可以支持多种语言的api //set每秒11万次，取get 81000次</p>
+<p>3、支持数据持久化</p>
+<p>4、value可以是string，hash， list， set, sorted set</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>1、去最新n个数据的操作</p>
+<p>2、排行榜，取top n个数据 //最佳人气前10条</p>
+<p>3、精确的设置过期时间</p>
+<p>4、计数器</p>
+<p>5、实时系统， 反垃圾系统</p>
+<p>6、pub， sub发布订阅构建实时消息系统</p>
+<p>7、构建消息队列</p>
+<p>8、缓存</p>
+<h2 id="key"><a href="#key" class="headerlink" title="key"></a>key</h2><p>keys * 获取所有的key</p>
+<p>select 0 选择第一个库</p>
+<p>move myString 1 将当前的数据库key移动到某个数据库,目标库有，则不能移动</p>
+<p>flush db      清除指定库</p>
+<p>randomkey     随机key</p>
+<p>type key      类型</p>
+<p>set key1 value1 设置key</p>
+<p>get key1    获取key</p>
+<p>mset key1 value1 key2 value2 key3 value3</p>
+<p>mget key1 key2 key3</p>
+<p>del key1   删除key</p>
+<p>exists key      判断是否存在key</p>
+<p>expire key 10   10过期</p>
+<p>pexpire key 1000 毫秒</p>
+<p>persist key     删除过期时间</p>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><p>set name cxx</p>
+<p>get name</p>
+<p>getrange name 0 -1        字符串分段</p>
+<p>getset name new_cxx       设置值，返回旧值</p>
+<p>mset key1 key2            批量设置</p>
+<p>mget key1 key2            批量获取</p>
+<p>setnx key value           不存在就插入（not exists）</p>
+<p>setex key time value      过期时间（expire）</p>
+<p>setrange key index value  从index开始替换value</p>
+<p>incr age        递增</p>
+<p>incrby age 10   递增</p>
+<p>decr age        递减</p>
+<p>decrby age 10   递减</p>
+<p>incrbyfloat     增减浮点数</p>
+<p>append          追加</p>
+<p>strlen          长度</p>
+<p>getbit/setbit/bitcount/bitop    位操作</p>
+<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><p>hset myhash name cxx</p>
+<p>hget myhash name</p>
+<p>hmset myhash name cxx age 25 note “i am notes”</p>
+<p>hmget myhash name age note   </p>
+<p>hgetall myhash               获取所有的</p>
+<p>hexists myhash name          是否存在</p>
+<p>hsetnx myhash score 100      设置不存在的</p>
+<p>hincrby myhash id 1          递增</p>
+<p>hdel myhash name             删除</p>
+<p>hkeys myhash                 只取key</p>
+<p>hvals myhash                 只取value</p>
+<p>hlen myhash                  长度</p>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>lpush mylist a b c  左插入</p>
+<p>rpush mylist x y z  右插入</p>
+<p>lrange mylist 0 -1  数据集合</p>
+<p>lpop mylist  弹出元素</p>
+<p>rpop mylist  弹出元素</p>
+<p>llen mylist  长度</p>
+<p>lrem mylist count value  删除</p>
+<p>lindex mylist 2          指定索引的值</p>
+<p>lset mylist 2 n          索引设值</p>
+<p>ltrim mylist 0 4         删除key</p>
+<p>linsert mylist before a  插入</p>
+<p>linsert mylist after a   插入</p>
+<p>rpoplpush list list2     转移列表的数据</p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>sadd myset redis </p>
+<p>smembers myset       数据集合</p>
+<p>srem myset set1         删除</p>
+<p>sismember myset set1 判断元素是否在集合中</p>
+<p>scard key_name       个数</p>
+<p>sdiff | sinter | sunion 操作：集合间运算：差集 | 交集 | 并集</p>
+<p>srandmember          随机获取集合中的元素</p>
+<p>spop                 从集合中弹出一个元素</p>
+<h2 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h2><p>zadd zset 1 one</p>
+<p>zadd zset 2 two</p>
+<p>zadd zset 3 three</p>
+<p>zincrby zset 1 one              增长分数</p>
+<p>zscore zset two                 获取分数</p>
+<p>zrange zset 0 -1 withscores     范围值</p>
+<p>zrangebyscore zset 10 25 withscores 指定范围的值</p>
+<p>zrangebyscore zset 10 25 withscores limit 1 2 分页</p>
+<p>Zrevrangebyscore zset 10 25 withscores  指定范围的值</p>
+<p>zcard zset  元素数量</p>
+<p>Zcount zset 获得指定分数范围内的元素个数</p>
+<p>Zrem zset one two        删除一个或多个元素</p>
+<p>Zremrangebyrank zset 0 1  按照排名范围删除元素</p>
+<p>Zremrangebyscore zset 0 1 按照分数范围删除元素</p>
+<p>Zrank zset 0 -1    分数最小的元素排名为0</p>
+<p>Zrevrank zset 0 -1  分数最大的元素排名为0</p>
+<p>Zinterstore</p>
+<p>zunionstore rank:last_week 7 rank:20150323 rank:20150324 rank:20150325  weights 1 1 1 1 1 1 1</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>sort mylist  排序</p>
+<p>sort mylist alpha desc limit 0 2 字母排序</p>
+<p>sort list by it:* desc           by命令</p>
+<p>sort list by it:<em> desc get it:</em>  get参数</p>
+<p>sort list by it:<em> desc get it:</em> store sorc:result  sort命令之store参数：表示把sort查询的结果集保存起来</p>
+<h2 id="订阅与发布"><a href="#订阅与发布" class="headerlink" title="订阅与发布"></a>订阅与发布</h2><p>订阅频道：subscribe chat1</p>
+<p>发布消息：publish chat1 “hell0 ni hao”</p>
+<p>查看频道：pubsub channels</p>
+<p>查看某个频道的订阅者数量: pubsub numsub chat1</p>
+<p>退订指定频道： unsubscrible chat1   , punsubscribe java.*</p>
+<p>订阅一组频道： psubscribe java.*</p>
+<h2 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h2><p>隔离性，原子性， </p>
+<p>步骤：      开始事务，执行命令，提交事务</p>
+<p>multi  //开启事务</p>
+<p>sadd myset a b c</p>
+<p>sadd myset e f g</p>
+<p>lpush mylist aa bb cc</p>
+<p>lpush mylist dd ff </p>
+<h2 id="服务器管理"><a href="#服务器管理" class="headerlink" title="服务器管理"></a>服务器管理</h2><p>dump.rdb</p>
+<p>appendonly.aof</p>
+<p>//BgRewriteAof 异步执行一个aop(appendOnly file)文件重写</p>
+<p>会创建当前一个AOF文件体积的优化版本</p>
+<p>//BgSave 后台异步保存数据到磁盘，会在当前目录下创建文件dump.rdb</p>
+<p>//save同步保存数据到磁盘，会阻塞主进程，别的客户端无法连接</p>
+<p>//client kill 关闭客户端连接</p>
+<p>//client list 列出所有的客户端</p>
+<p>//给客户端设置一个名称</p>
+<p>client setname myclient1</p>
+<p>client getname</p>
+<p>config get port</p>
+<p>//configRewrite 对redis的配置文件进行改写</p>
+<p>rdb </p>
+<p>save 900 1</p>
+<p>save 300 10</p>
+<p>save 60 10000</p>
+<p>aop备份处理</p>
+<p>appendonly yes 开启持久化</p>
+<p>appendfsync everysec 每秒备份一次</p>
+<p>bgsave异步保存数据到磁盘（快照保存）</p>
+<p>lastsave返回上次成功保存到磁盘的unix的时间戳</p>
+<p>shutdown同步保存到服务器并关闭redis服务器</p>
+<p>bgrewriteaof文件压缩处理（命令）</p>
+</div><div class="tags"><a href="/tags/Redis"><i class="fa fa-tag">Redis</i></a></div><div class="post-nav"><a class="pre" href="/2018/05/09/事务/">事务</a><a class="next" href="/2018/03/23/Redis学习/">Redis学习</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://nsthis.com"/></form></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p></p><a class="info-icon" href="mailto:nlfthis@gmail.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/nsthis" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/PHP框架/" style="font-size: 15px;">PHP框架</a> <a href="/tags/高并发/" style="font-size: 15px;">高并发</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chensenlin.cn/" title="你好我是森林!" target="_blank">你好我是森林!</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2023 <a href="/." rel="nofollow">Hello This.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

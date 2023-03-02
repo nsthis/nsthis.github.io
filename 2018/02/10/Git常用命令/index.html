@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Git常用命令 | Hello This</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Git常用命令</h1><a id="logo" href="/.">Hello This</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Git常用命令</h1><div class="post-meta">2018-02-10<span> | </span><span class="category"><a href="/categories/Git/">Git</a></span></div><div class="post-content"><p>Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。 [1]  Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
+<a id="more"></a>
+<h2 id="Git与SVN的区别"><a href="#Git与SVN的区别" class="headerlink" title="Git与SVN的区别"></a>Git与SVN的区别</h2><p>我没有用过SVN，所以这里摘抄点资料</p>
+<p>1、Git是分布式的，SVN不是</p>
+<p>2、GIT把内容按元数据方式存储，而SVN是按文件</p>
+<p>3、GIT分支和SVN的分支不同</p>
+<p>4、GIT没有一个全局的版本号，而SVN有</p>
+<p>5、GIT的内容完整性要优于SVN</p>
+<p>6、Git下载下来后，在本地不必联网就可以看到所有的log，很方便学习，SVN却需要联网</p>
+<p>7、SVN在Commit前，我们都建议是先Update一下，跟本地的代码编译没问题，并确保开发的功能正常后再提交，这样其实挺麻烦的，有好几次同事没有先Updata，就Commit了，发生了一些错误，耽误了大家时间，Git可能这种情况会少些</p>
+<p><a href="https://www.cnblogs.com/somethingWithiOS/p/5636356.html" target="_blank" rel="noopener">本文链接来源</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git clone 地址</td>
+<td>就是将远程的分支给下载下来,初使化 </td>
+</tr>
+<tr>
+<td>Git add</td>
+<td>添加文件</td>
+</tr>
+<tr>
+<td>Git commit -m ‘内容’</td>
+<td>添加说明 </td>
+</tr>
+<tr>
+<td>Git init</td>
+<td>仓库初使化</td>
+</tr>
+<tr>
+<td>Git push</td>
+<td>提交</td>
+</tr>
+<tr>
+<td>Git pull</td>
+<td>拉取</td>
+</tr>
+<tr>
+<td>Git diff</td>
+<td>检查对比文件的一致性</td>
+</tr>
+<tr>
+<td>Git status</td>
+<td>显示相关的当前的 git 信息 </td>
+</tr>
+<tr>
+<td>Git status -s</td>
+<td>哪些文件发生了变化 </td>
+</tr>
+<tr>
+<td>Git branch 分支</td>
+<td>创建分支</td>
+</tr>
+<tr>
+<td>Git checkout 分支</td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td>Git branch -d 分支名</td>
+<td>删除分支 </td>
+</tr>
+<tr>
+<td>Git merge 源分支名</td>
+<td>从源分支名合并内容至当前分支</td>
+</tr>
+<tr>
+<td>Git log</td>
+<td>查看 git 历史 </td>
+</tr>
+<tr>
+<td>Git rm</td>
+<td>删除 git 中的文件 </td>
+</tr>
+<tr>
+<td>Git reset –hard 写上 log 中的编号</td>
+<td>回滚至某个版本 </td>
+</tr>
+<tr>
+<td>Git checkout -b A B 分支</td>
+<td>建立 A 分支，从 B 分支取内容 </td>
+</tr>
+<tr>
+<td>Git branch</td>
+<td>显示所有分支</td>
+</tr>
+<tr>
+<td>Git clone -b 分支名    地址</td>
+<td>拉去某分支源码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Git分支使用"><a href="#Git分支使用" class="headerlink" title="Git分支使用"></a>Git分支使用</h2><p>1、当A、B、C三人开发同一项目，但是A与B的代码完成，需要提交正式服，但是C的代码没有完成，此时如何设计？</p>
+<p>2、首先我们需要明确，A与B的代码是提交的，但是C的代码不能提交，那么我们则需要有5个分支：master(主，也可以理解为正式服)、dev(测试服)、A、B、C。</p>
+<p>3、然后我们用dev合并A，再合并B，合并完之后如果测试没问题，那么再用master合并dev，完成该需求的git设计。</p>
+</div><div class="tags"><a href="/tags/Git"><i class="fa fa-tag">Git</i></a></div><div class="post-nav"><a class="pre" href="/2018/03/08/Git忽略文件/">Git忽略文件</a><a class="next" href="/2018/02/03/PHP7新特性（下）/">PHP7新特性（下）</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://nsthis.com"/></form></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p></p><a class="info-icon" href="mailto:nlfthis@gmail.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/nsthis" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/PHP框架/" style="font-size: 15px;">PHP框架</a> <a href="/tags/高并发/" style="font-size: 15px;">高并发</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chensenlin.cn/" title="你好我是森林!" target="_blank">你好我是森林!</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2023 <a href="/." rel="nofollow">Hello This.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>MySQL数据库设计规范 | Hello This</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">MySQL数据库设计规范</h1><a id="logo" href="/.">Hello This</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">MySQL数据库设计规范</h1><div class="post-meta">2018-01-01<span> | </span><span class="category"><a href="/categories/MySQL/">MySQL</a></span></div><div class="post-content"><p>MySQL数据库是我们经常用的，本文讲解MySQL数据库的设计规范</p>
+<a id="more"></a>
+<h2 id="设计阶段"><a href="#设计阶段" class="headerlink" title="设计阶段"></a>设计阶段</h2><h3 id="数据库表的设计范式-三范式-amp-反范式"><a href="#数据库表的设计范式-三范式-amp-反范式" class="headerlink" title="数据库表的设计范式(三范式&amp;反范式)"></a>数据库表的设计范式(三范式&amp;反范式)</h3><p>1、为什么需要范式<br>优点：编程相对简单，数据量更小，更适合放入内存，更新更快，只需要更新少量的数据，<br>更少的冗余意味着更少的需要group distinct 之类的操作。<br>缺陷: 查询变得相当复杂，查询时需要更多的连接join ，一些复合索引的列由于范式化的需要被分割到不同的表中，导致索引策略不佳。</p>
+<p>2、第一范式<br>数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值，即实体中的某个属性不能有多个值或者不能有重复的属性。如果出现重复的属性，就可能需要定义一个新的实体，新的实体由重复的属性构成，新实体与原实体之间为一对多关系。在第一范式（1NF）中表的每一行只包含一个实例的信息。简而言之，第一范式就是无重复的列。<br>说明：在任何一个关系数据库中，第一范式（1NF）是对关系模式的基本要求，不满足第一范式（1NF）的数据库就不是关系数据库。</p>
+<p>3、第二范式<br>如果关系模式R为第一范式，并且R中每一个非主属性完全函数依赖于R的某个候选键， 则称为第二范式模式。<br>第二范式（2NF）是在第一范式（1NF）的基础上建立起来的，即满足第二范式（2NF）必须先满足第一范式（1NF）。第二范式（2NF）要求数据库表中的每个实例或行必须可以被惟一地区分。为实现区分通常需要为表加上一个列，以存储各个实例的惟一标识。这个惟一属性列被称为主关键字或主键、主码。<br>例如员工信息表中加上了员工编号（emp_id）列，因为每个员工的员工编号是惟一的，因此每个员工可以被惟一区分。<br>简而言之，第二范式（2NF）就是非主属性完全依赖于主关键字。</p>
+<p>4、第三范式<br>如果关系模式R是第二范式，且每个非主属性都不传递依赖于R的候选键，则称R为第三范式模式。<br>满足第三范式（3NF）必须先满足第二范式（2NF）。第三范式（3NF）要求一个数据库表中不包含已在其它表中已包含的非主关键字信息。<br>例如，存在一个部门信息表，其中每个部门有部门编号（dept_id）、部门名称、部门简介等信息。那么在的员工信息表中列出部门编号后就不能再将部门名称、部门简介等与部门有关的信息再加入员工信息表中。如果不存在部门信息表，则根据第三范式（3NF）也应该构建它，否则就会有大量的数据冗余。<br>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。简而言之，第三范式就是属性不依赖于其它非主属性。</p>
+<p>5、鲍依斯-科得范式（BCNF是3NF的改进形式）<br>若关系模式R是第一范式，且每个属性都不传递依赖于R的候选键。这种关系模式就是BCNF模式。即在第三范式的基础上，数据库表中如果不存在任何字段对任一候选关键字段的传递函数依赖则符合鲍依斯-科得范式。</p>
+<p>6、反范式</p>
+<p>用空间来换取时间,把数据冗余在多个表中,当查询时可以减少或者是避免表之间的关联.</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB:"></a>InnoDB:</h3><p>1、灾难恢复性好</p>
+<p>2、支持4中级别的事务，默认事务的隔离级别是Repeatable Read，事务支持是通过MVCC多版本并发控制来提供的</p>
+<p>3、使用行级锁，并发性能高</p>
+<p>4、使用此存储引擎的表，数据的物理组织形式是簇表，数据按主键来组织，即主键索引和数据是在一起的，B+树就是这样的</p>
+<p>5、实现缓冲管理，能缓存索引也能缓存数据</p>
+<p>6、支持外键</p>
+<p>7、支持热备份</p>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM:"></a>MyISAM:</h3><p>1、配合锁，实现操作系统下的复制备份，迁移</p>
+<p>2、使用表记锁并发性差</p>
+<p>3、支持全文索引</p>
+<p>4、主机宕机后，表容易损坏，灾难恢复性不佳</p>
+<p>5、无事务支持</p>
+<p>6、只缓存索引，数据缓存利用操作系统缓冲区实现的，引发过多系统调用，性能不佳。</p>
+<p>7、数据紧凑存储，可以获得更快的索引和更快的全表扫描性能。</p>
+<h3 id="存储引擎的选择"><a href="#存储引擎的选择" class="headerlink" title="存储引擎的选择:"></a>存储引擎的选择:</h3><p>设计阶段我们选用InnoDB存储引擎作为数据的存储模式,使用事务、且并发性高，支持外键，支持外键索引。</p>
+<h3 id="字符集选择"><a href="#字符集选择" class="headerlink" title="字符集选择"></a>字符集选择</h3><p>1、字符编码采用utf-8</p>
+<p>2、字符校验采用utf-8-cgi</p>
+<h3 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h3><p>1、命名有意义，一眼知道这张表是干什么用的</p>
+<p>2、数据库，表都用小写</p>
+<p>   数据库形如：backend</p>
+<p>   数据表形如：client_device_info(客户端设备信息)，不要缩写，字母全小写</p>
+<p>3、索引命名以idx_为前缀</p>
+<p>4、命名不要过长（应尽量少于25字符）</p>
+<p>5、不要使用保留字</p>
+<p>6、同一字段在不同的表中也应是相同的类型和长度</p>
+<p>7、同一数据库下有不同的模块，可以考虑对表名用不同的前缀标识</p>
+<p>8、备份表时加上时间标识</p>
+<h3 id="数据表设计与规划"><a href="#数据表设计与规划" class="headerlink" title="数据表设计与规划"></a>数据表设计与规划</h3><p>1、如果没有特殊情况，建议选择InooDB索引</p>
+<p>2、每个表都应该有主键，可选择自增字段，或整型字段。例外情况，一些应用会频繁的基于某些字段进行检索，设计人员可能认为这些字段／字组合更适合做主键，因为更自然、更高效</p>
+<p>3、(不做强制要求)尽量将字段设置为NOT NULL。因为NULL值的存储需要额外的空间，且会导致比较运算更为复杂，会使得优化器更难以优化sql。null 值虽然会导致比较运算更加复杂，但这比因此定义了not null带来应用逻辑异要好</p>
+<p>4、使用更短小的列，比如整型列。整型列的执行速度往往更快</p>
+<p>5、存储精确浮点数必须使用DECIMAL代替float和double</p>
+<p>6、建议使用unsigned类型存储非负值</p>
+<p>7、建议使用 int unsigned存储ipv4</p>
+<p>8、整型定义中不添加显示长度的值，使用int，而不是int(4)</p>
+<p>9、尽可能不要使用text,blob类型</p>
+<p>10、varchar（n） n表示字符数而不是字节数，比如varchar（255）最大可存储255个汉字，需根据实际字符长度选择n的值</p>
+<p>11、字符集建议选择utf-8</p>
+<p>12、存储年时使用year类型</p>
+<p>13、存储日期时使用date类型</p>
+<p>14、存储时间时，建议使用timestamp类型，因为timestamp使用的是4字节，datetime使用的是8字节</p>
+<p>15、不要在数据库中使用varbinary或blob存储图片及文件，mysql 并不适合大量存储这类型文件</p>
+<p>16、join 操作的字段，在不同表中的类型及命名要一致</p>
+<p>17、如果更改表结构会影响性能，需要我司后台(有DBA尽可能找DBA)进行联合评审</p>
+<h3 id="慎用外键"><a href="#慎用外键" class="headerlink" title="慎用外键"></a>慎用外键</h3><p>1、外键的优点：</p>
+<p>外键约束使得程序员更不容易将不一致性引入数据库，而且设计合适外键有助于以文档方式记录表间关系。</p>
+<p>2、外键的缺点：</p>
+<p>但这些优点是以服务器为执行必要的检查而花费额外的开销为代价的。服务器进行额外的检查会影响性能。其次外键对并发性能的影响很大，因每次修改数据都需要去另外一个表检查数据，需要获取额外的锁（以确保事务完成之前，父表的记录不会被删除）高并发环境下出现性能问题，更好的办法是在应用层实现外键约束。</p>
+</div><div class="tags"><a href="/tags/MySQL"><i class="fa fa-tag">MySQL</i></a></div><div class="post-nav"><a class="pre" href="/2018/01/20/PHP7新特性（上）/">PHP7新特性(上)</a><a class="next" href="/2017/12/19/LNMP环境安装/">LNMP环境安装</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://nsthis.com"/></form></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p></p><a class="info-icon" href="mailto:nlfthis@gmail.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/nsthis" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/PHP框架/" style="font-size: 15px;">PHP框架</a> <a href="/tags/高并发/" style="font-size: 15px;">高并发</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chensenlin.cn/" title="你好我是森林!" target="_blank">你好我是森林!</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2023 <a href="/." rel="nofollow">Hello This.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
